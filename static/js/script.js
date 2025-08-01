@@ -23,6 +23,7 @@
         
         this.customSounds = new Map(); // Store custom audio files
         this.loadCustomSounds(); // Load custom sounds from IndexedDB
+        this.isFullscreenMode = false; // Track fullscreen focus mode
         
         this.loadSettings();
         this.initializeElements();
@@ -124,11 +125,23 @@
     
     startTimer() {
         this.isRunning = true;
+        const wasResuming = this.isPaused;
         this.isPaused = false;
         
         this.startBtn.style.display = 'none';
         this.pauseBtn.style.display = 'inline-flex';
         this.timeCircle.classList.add('active');
+        
+        // Reset start button text if it was showing "Resume"
+        this.startBtn.innerHTML = '<i class="fas fa-play"></i> Start';
+        
+        // Add fullscreen focus mode button
+        this.showFullscreenButton();
+        
+        // Automatically enter fullscreen focus mode when starting or resuming timer
+        setTimeout(() => {
+            this.enterFullscreenFocusMode();
+        }, wasResuming ? 200 : 500); // Shorter delay for resume, longer for initial start
         
         this.timerInterval = setInterval(() => {
             this.timeRemaining--;
@@ -140,7 +153,7 @@
             }
         }, 1000);
         
-        this.sendTimerEvent('start');
+        this.sendTimerEvent(wasResuming ? 'resume' : 'start');
     }
     
     pauseTimer() {
@@ -153,6 +166,11 @@
         this.startBtn.innerHTML = '<i class="fas fa-play"></i> Resume';
         this.pauseBtn.style.display = 'none';
         this.timeCircle.classList.remove('active');
+        
+        // Exit fullscreen mode when pausing
+        if (this.isFullscreenMode) {
+            this.exitFullscreenFocusMode();
+        }
     }
     
     resetTimer() {
@@ -173,6 +191,14 @@
         this.startBtn.innerHTML = '<i class="fas fa-play"></i> Start';
         this.pauseBtn.style.display = 'none';
         this.timeCircle.classList.remove('active');
+        
+        // Exit fullscreen mode if active
+        if (this.isFullscreenMode) {
+            this.exitFullscreenFocusMode();
+        }
+        
+        // Hide fullscreen button
+        this.hideFullscreenButton();
     }
     
     completeTimer() {
@@ -894,6 +920,189 @@
             messageEl.style.display = 'none';
         }, 5000);
     }
+    
+    // Fullscreen Focus Mode Methods
+    enterFullscreenFocusMode() {
+        if (!this.isRunning) return;
+        
+        this.isFullscreenMode = true;
+        
+        // Request fullscreen
+        const element = document.documentElement;
+        if (element.requestFullscreen) {
+            element.requestFullscreen();
+        } else if (element.webkitRequestFullscreen) {
+            element.webkitRequestFullscreen();
+        } else if (element.msRequestFullscreen) {
+            element.msRequestFullscreen();
+        }
+        
+        // Add fullscreen class to body
+        document.body.classList.add('fullscreen-focus-mode');
+        
+        // Hide unnecessary elements
+        this.hideNonEssentialElements();
+        
+        // Add exit fullscreen button
+        this.showExitFullscreenButton();
+        
+        // Listen for fullscreen changes
+        document.addEventListener('fullscreenchange', this.handleFullscreenChange.bind(this));
+        document.addEventListener('webkitfullscreenchange', this.handleFullscreenChange.bind(this));
+        document.addEventListener('msfullscreenchange', this.handleFullscreenChange.bind(this));
+    }
+    
+    exitFullscreenFocusMode() {
+        this.isFullscreenMode = false;
+        
+        // Exit fullscreen
+        if (document.exitFullscreen) {
+            document.exitFullscreen();
+        } else if (document.webkitExitFullscreen) {
+            document.webkitExitFullscreen();
+        } else if (document.msExitFullscreen) {
+            document.msExitFullscreen();
+        }
+        
+        // Remove fullscreen class
+        document.body.classList.remove('fullscreen-focus-mode');
+        
+        // Show all elements
+        this.showNonEssentialElements();
+        
+        // Remove exit button
+        this.removeExitFullscreenButton();
+    }
+    
+    handleFullscreenChange() {
+        const isCurrentlyFullscreen = !!(document.fullscreenElement || 
+                                        document.webkitFullscreenElement || 
+                                        document.msFullscreenElement);
+        
+        if (!isCurrentlyFullscreen && this.isFullscreenMode) {
+            // User exited fullscreen manually (ESC key)
+            this.exitFullscreenFocusMode();
+        }
+    }
+    
+    hideNonEssentialElements() {
+        // Hide navbar
+        const navbar = document.querySelector('.navbar');
+        if (navbar) navbar.style.display = 'none';
+        
+        // Hide timer header (title and subtitle)
+        const timerHeader = document.querySelector('.timer-header');
+        if (timerHeader) timerHeader.style.display = 'none';
+        
+        // Hide session settings
+        const sessionSettings = document.querySelector('.session-settings');
+        if (sessionSettings) sessionSettings.style.display = 'none';
+        
+        // Hide session counter
+        const sessionCounter = document.querySelector('.session-counter');
+        if (sessionCounter) sessionCounter.style.display = 'none';
+        
+        // Hide settings button
+        const settingsBtn = document.querySelector('.settings-btn');
+        if (settingsBtn) settingsBtn.style.display = 'none';
+        
+        // Hide container margins/padding for full utilization
+        const pomodoroContainer = document.querySelector('.pomodoro-container');
+        if (pomodoroContainer) {
+            pomodoroContainer.style.height = '100vh';
+            pomodoroContainer.style.display = 'flex';
+            pomodoroContainer.style.alignItems = 'center';
+            pomodoroContainer.style.justifyContent = 'center';
+        }
+        
+        // Center the timer card
+        const timerCard = document.querySelector('.timer-card');
+        if (timerCard) {
+            timerCard.style.background = 'transparent';
+            timerCard.style.border = 'none';
+            timerCard.style.boxShadow = 'none';
+        }
+    }
+    
+    showNonEssentialElements() {
+        // Show navbar
+        const navbar = document.querySelector('.navbar');
+        if (navbar) navbar.style.display = '';
+        
+        // Show timer header
+        const timerHeader = document.querySelector('.timer-header');
+        if (timerHeader) timerHeader.style.display = '';
+        
+        // Show session settings
+        const sessionSettings = document.querySelector('.session-settings');
+        if (sessionSettings) sessionSettings.style.display = '';
+        
+        // Show session counter
+        const sessionCounter = document.querySelector('.session-counter');
+        if (sessionCounter) sessionCounter.style.display = '';
+        
+        // Show settings button
+        const settingsBtn = document.querySelector('.settings-btn');
+        if (settingsBtn) settingsBtn.style.display = '';
+        
+        // Reset container styles
+        const pomodoroContainer = document.querySelector('.pomodoro-container');
+        if (pomodoroContainer) {
+            pomodoroContainer.style.height = '';
+            pomodoroContainer.style.display = '';
+            pomodoroContainer.style.alignItems = '';
+            pomodoroContainer.style.justifyContent = '';
+        }
+        
+        // Reset timer card styles
+        const timerCard = document.querySelector('.timer-card');
+        if (timerCard) {
+            timerCard.style.background = '';
+            timerCard.style.border = '';
+            timerCard.style.boxShadow = '';
+        }
+    }
+    
+    showExitFullscreenButton() {
+        const exitBtn = document.createElement('button');
+        exitBtn.id = 'exitFullscreenBtn';
+        exitBtn.className = 'exit-fullscreen-btn';
+        exitBtn.innerHTML = '<i class="fas fa-times"></i> Exit Focus Mode (ESC)';
+        exitBtn.onclick = () => this.exitFullscreenFocusMode();
+        
+        document.body.appendChild(exitBtn);
+    }
+    
+    removeExitFullscreenButton() {
+        const exitBtn = document.getElementById('exitFullscreenBtn');
+        if (exitBtn) {
+            exitBtn.remove();
+        }
+    }
+    
+    showFullscreenButton() {
+        // Add fullscreen button to timer controls if not already present
+        const timerControls = document.querySelector('.timer-controls');
+        let fullscreenBtn = document.getElementById('fullscreenBtn');
+        
+        if (!fullscreenBtn && timerControls) {
+            fullscreenBtn = document.createElement('button');
+            fullscreenBtn.id = 'fullscreenBtn';
+            fullscreenBtn.className = 'btn btn-outline-info btn-lg';
+            fullscreenBtn.innerHTML = '<i class="fas fa-expand"></i> Focus Mode (F11)';
+            fullscreenBtn.onclick = () => this.enterFullscreenFocusMode();
+            fullscreenBtn.style.marginLeft = '10px';
+            
+            timerControls.appendChild(fullscreenBtn);
+        }
+    }
+    
+    hideFullscreenButton() {
+        const fullscreenBtn = document.getElementById('fullscreenBtn');
+        if (fullscreenBtn) {
+            fullscreenBtn.remove();
+        }
+    }
 }
 
 let timer;
@@ -994,6 +1203,18 @@ document.addEventListener('DOMContentLoaded', function() {
         } else if (event.code === 'KeyR' && event.ctrlKey) {
             event.preventDefault();
             timer.resetTimer();
+        } else if (event.code === 'F11') {
+            event.preventDefault();
+            if (timer.isRunning) {
+                if (timer.isFullscreenMode) {
+                    timer.exitFullscreenFocusMode();
+                } else {
+                    timer.enterFullscreenFocusMode();
+                }
+            }
+        } else if (event.code === 'Escape' && timer.isFullscreenMode) {
+            event.preventDefault();
+            timer.exitFullscreenFocusMode();
         }
     });
     
