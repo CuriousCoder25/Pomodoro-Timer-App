@@ -1,0 +1,233 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="pomodoro-container">
+    <div class="row justify-content-center">
+        <div class="col-md-8 col-lg-6">
+            <div class="timer-card">
+                <div class="timer-header">
+                    <h1 class="timer-title">🍅 Pomodoro Timer</h1>
+                    <p class="timer-subtitle">Stay focused and productive</p>
+                </div>
+
+                <div class="timer-display">
+                    <div class="progress-ring-container">
+                        <svg class="progress-ring" viewBox="0 0 280 280">
+                            <circle class="progress-ring-circle-bg" cx="140" cy="140" r="130"></circle>
+                            <circle class="progress-ring-circle" cx="140" cy="140" r="130" id="progressCircle"></circle>
+                        </svg>
+                    </div>
+                    <div class="time-circle" id="timeCircle">
+                        <div class="time-text">
+                            <span id="timeDisplay">25:00</span>
+                            <div class="session-type" id="sessionType">Work Session</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="timer-controls">
+                    <button class="btn btn-primary btn-lg" id="startBtn" onclick="startTimer()">
+                        <i class="fas fa-play"></i> Start
+                    </button>
+                    <button class="btn btn-secondary btn-lg" id="pauseBtn" onclick="pauseTimer()" style="display: none;">
+                        <i class="fas fa-pause"></i> Pause
+                    </button>
+                    <button class="btn btn-outline-secondary btn-lg" id="resetBtn" onclick="resetTimer()">
+                        <i class="fas fa-refresh"></i> Reset
+                    </button>
+                </div>
+
+                <div class="session-settings">
+                    <div class="row">
+                        <div class="col-3">
+                            <div class="setting-item active" data-type="work_25" data-duration="25">
+                                <div class="setting-icon">💼</div>
+                                <div class="setting-label">Work</div>
+                                <div class="setting-time">25 min</div>
+                            </div>
+                        </div>
+                        <div class="col-3">
+                            <div class="setting-item" data-type="work_50" data-duration="50">
+                                <div class="setting-icon">🎯</div>
+                                <div class="setting-label">Deep Work</div>
+                                <div class="setting-time">50 min</div>
+                            </div>
+                        </div>
+                        <div class="col-3">
+                            <div class="setting-item" data-type="short_break" data-duration="5">
+                                <div class="setting-icon">☕</div>
+                                <div class="setting-label">Short Break</div>
+                                <div class="setting-time">5 min</div>
+                            </div>
+                        </div>
+                        <div class="col-3">
+                            <div class="setting-item" data-type="long_break" data-duration="15">
+                                <div class="setting-icon">🛋️</div>
+                                <div class="setting-label">Long Break</div>
+                                <div class="setting-time">15 min</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="session-counter">
+                    <h5>Sessions Completed Today</h5>
+                    <div class="session-badges">
+                        <span class="badge bg-success" id="workSessions">Work: 0</span>
+                        <span class="badge bg-info" id="breakSessions">Breaks: 0</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="settingsModal" tabindex="-1">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Timer Settings</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+            <div class="modal-body">
+                <div class="mb-3">
+                    <label for="workDuration" class="form-label">Work Duration (minutes)</label>
+                    <input type="number" class="form-control" id="workDuration" value="25" min="1" max="60">
+                </div>
+                <div class="mb-3">
+                    <label for="deepWorkDuration" class="form-label">Deep Work Duration (minutes)</label>
+                    <input type="number" class="form-control" id="deepWorkDuration" value="50" min="1" max="120">
+                </div>
+                <div class="mb-3">
+                    <label for="shortBreakDuration" class="form-label">Short Break Duration (minutes)</label>
+                    <input type="number" class="form-control" id="shortBreakDuration" value="5" min="1" max="30">
+                </div>
+                <div class="mb-3">
+                    <label for="longBreakDuration" class="form-label">Long Break Duration (minutes)</label>
+                    <input type="number" class="form-control" id="longBreakDuration" value="15" min="1" max="60">
+                </div>
+                <div class="form-check">
+                    <input class="form-check-input" type="checkbox" id="autoStartBreaks" checked>
+                    <label class="form-check-label" for="autoStartBreaks">
+                        Auto-start breaks after work sessions
+                    </label>
+                </div>
+                <div class="form-check">
+                    <input class="form-check-input" type="checkbox" id="soundNotifications" checked>
+                    <label class="form-check-label" for="soundNotifications">
+                        Sound notifications
+                    </label>
+                </div>
+                <div class="mb-4">
+                    <label class="form-label">Notification Sound</label>
+                    <div class="sound-selection-container">
+                        <!-- Built-in Sounds -->
+                        <div class="sound-group mb-3">
+                            <h6 class="sound-group-title">Built-in Sounds</h6>
+                            <div class="row g-2">
+                                <div class="col-6 col-md-4">
+                                    <div class="sound-option" data-sound="chord" data-type="builtin">
+                                        <input type="radio" name="notificationSound" id="sound-chord" value="chord" class="sound-radio">
+                                        <label for="sound-chord" class="sound-label">
+                                            <i class="fas fa-music"></i>
+                                            <span>Harmony Chord</span>
+                                            <small>Default</small>
+                                        </label>
+                                    </div>
+                                </div>
+                                <div class="col-6 col-md-4">
+                                    <div class="sound-option" data-sound="bell" data-type="builtin">
+                                        <input type="radio" name="notificationSound" id="sound-bell" value="bell" class="sound-radio">
+                                        <label for="sound-bell" class="sound-label">
+                                            <i class="fas fa-bell"></i>
+                                            <span>Gentle Bell</span>
+                                        </label>
+                                    </div>
+                                </div>
+                                <div class="col-6 col-md-4">
+                                    <div class="sound-option" data-sound="chime" data-type="builtin">
+                                        <input type="radio" name="notificationSound" id="sound-chime" value="chime" class="sound-radio">
+                                        <label for="sound-chime" class="sound-label">
+                                            <i class="fas fa-wind"></i>
+                                            <span>Wind Chime</span>
+                                        </label>
+                                    </div>
+                                </div>
+                                <div class="col-6 col-md-4">
+                                    <div class="sound-option" data-sound="tone" data-type="builtin">
+                                        <input type="radio" name="notificationSound" id="sound-tone" value="tone" class="sound-radio">
+                                        <label for="sound-tone" class="sound-label">
+                                            <i class="fas fa-volume-up"></i>
+                                            <span>Simple Tone</span>
+                                        </label>
+                                    </div>
+                                </div>
+                                <div class="col-6 col-md-4">
+                                    <div class="sound-option" data-sound="ding" data-type="builtin">
+                                        <input type="radio" name="notificationSound" id="sound-ding" value="ding" class="sound-radio">
+                                        <label for="sound-ding" class="sound-label">
+                                            <i class="fas fa-chime"></i>
+                                            <span>Digital Ding</span>
+                                        </label>
+                                    </div>
+                                </div>
+                                <div class="col-6 col-md-4">
+                                    <div class="sound-option" data-sound="notification" data-type="builtin">
+                                        <input type="radio" name="notificationSound" id="sound-notification" value="notification" class="sound-radio">
+                                        <label for="sound-notification" class="sound-label">
+                                            <i class="fas fa-desktop"></i>
+                                            <span>System Beep</span>
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Custom Sounds -->
+                        <div class="sound-group">
+                            <div class="d-flex justify-content-between align-items-center mb-2">
+                                <h6 class="sound-group-title mb-0">Custom Sounds</h6>
+                                <button type="button" class="btn btn-sm btn-outline-primary" onclick="document.getElementById('customSoundFile').click()">
+                                    <i class="fas fa-plus"></i> Add Sound
+                                </button>
+                            </div>
+                            <div id="customSoundsGrid" class="row g-2">
+                                <!-- Custom sounds will be dynamically added here -->
+                            </div>
+                            <div id="customSoundsEmpty" class="text-center p-3 border rounded bg-light" style="display: none;">
+                                <i class="fas fa-music text-muted mb-2" style="font-size: 2rem;"></i>
+                                <p class="text-muted mb-2">No custom sounds yet</p>
+                                <p class="text-muted small mb-0">Upload your own notification sounds!</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Hidden file input -->
+                    <input type="file" id="customSoundFile" accept="audio/*" style="display: none;">
+                    
+                    <!-- Upload message -->
+                    <div id="uploadMessage" class="mt-2" style="display: none;"></div>
+                </div>
+                <div class="mb-3">
+                    <label for="notificationVolume" class="form-label">Notification Volume</label>
+                    <input type="range" class="form-range" id="notificationVolume" min="0" max="100" value="50">
+                    <small class="form-text text-muted">Volume: <span id="volumeDisplay">50</span>%</small>
+                </div>
+                <div class="mb-3">
+                    <button type="button" class="btn btn-outline-info btn-sm" onclick="testNotificationSound()">
+                        <i class="fas fa-volume-up"></i> Test Notification Sound
+                    </button>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                <button type="button" class="btn btn-primary" onclick="saveSettings()">Save Changes</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<button class="settings-btn" data-bs-toggle="modal" data-bs-target="#settingsModal">
+    <i class="fas fa-cog"></i>
+</button>
+{% endblock %}

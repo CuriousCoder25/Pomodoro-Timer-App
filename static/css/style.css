@@ -1,0 +1,1313 @@
+/* ===== CSS VARIABLES ===== */
+:root {
+    /* Work Mode Colors */
+    --work-primary: #2d5a27;
+    --work-secondary: #4a7c59;
+    --work-accent: #76c7c0;
+    --work-light: #a8e6cf;
+    --work-bg: #f0f9ff;
+    
+    /* Break Mode Colors */
+    --break-primary: #8b1538;
+    --break-secondary: #c4384d;
+    --break-accent: #ff6b6b;
+    --break-light: #ffb3ba;
+    --break-bg: #fff5f5;
+    
+    /* Neutral Colors */
+    --dark: #2c3e50;
+    --light: #ecf0f1;
+    --white: #ffffff;
+    --gray: #7f8c8d;
+    
+    /* Shadows */
+    --shadow-sm: 0 2px 10px rgba(0, 0, 0, 0.1);
+    --shadow-md: 0 8px 25px rgba(0, 0, 0, 0.15);
+    --shadow-lg: 0 15px 35px rgba(0, 0, 0, 0.1);
+    
+    /* Transitions */
+    --transition: all 0.3s ease;
+    --transition-slow: all 0.5s ease;
+}
+
+/* ===== RESET & BASE STYLES ===== */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: linear-gradient(135deg, var(--work-light) 0%, var(--work-bg) 100%);
+    min-height: 100vh;
+    transition: var(--transition-slow);
+    color: var(--dark);
+}
+
+body.break-mode {
+    background: linear-gradient(135deg, var(--break-light) 0%, var(--break-bg) 100%);
+}
+
+/* ===== NAVBAR ===== */
+.navbar {
+    background: linear-gradient(90deg, var(--work-primary) 0%, var(--work-secondary) 100%) !important;
+    box-shadow: var(--shadow-sm);
+    transition: var(--transition-slow);
+}
+
+.navbar.break-mode {
+    background: linear-gradient(90deg, var(--break-primary) 0%, var(--break-secondary) 100%) !important;
+}
+
+.navbar-brand {
+    font-weight: bold;
+    font-size: 1.5rem;
+    color: var(--white) !important;
+}
+
+.navbar-toggler {
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    padding: 0.25rem 0.5rem;
+    font-size: 1rem;
+    border-radius: 0.375rem;
+    transition: var(--transition);
+}
+
+.navbar-toggler:focus {
+    box-shadow: 0 0 0 0.25rem rgba(255, 255, 255, 0.25);
+}
+
+.navbar-toggler-icon {
+    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='rgba%28255, 255, 255, 1%29' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e");
+    width: 1.5em;
+    height: 1.5em;
+}
+
+/* ===== MAIN CONTAINER ===== */
+.pomodoro-container {
+    padding: 2rem 1rem;
+    min-height: calc(100vh - 80px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.pomodoro-container .row {
+    width: 100%;
+    margin: 0;
+    display: flex;
+    justify-content: center;
+}
+
+.pomodoro-container .col-md-8,
+.pomodoro-container .col-lg-6 {
+    padding: 0 15px;
+    width: 100%;
+    max-width: 100%;
+}
+
+/* ===== TIMER CARD ===== */
+.timer-card {
+    background: var(--white);
+    border-radius: 30px;
+    padding: 2rem 1.5rem;
+    box-shadow: 
+        0 25px 50px rgba(0, 0, 0, 0.1),
+        0 0 0 1px rgba(255, 255, 255, 0.5);
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+    transition: var(--transition-slow);
+    width: 100%;
+    max-width: 600px;
+    margin: 0 auto;
+    backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    box-sizing: border-box;
+}
+
+.timer-card.break-mode {
+    background: linear-gradient(135deg, var(--white) 0%, var(--break-bg) 30%);
+}
+
+.timer-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 5px;
+    background: linear-gradient(90deg, var(--work-primary), var(--work-accent));
+    transition: var(--transition-slow);
+}
+
+.timer-card.break-mode::before {
+    background: linear-gradient(90deg, var(--break-primary), var(--break-accent));
+}
+
+/* ===== TIMER HEADER ===== */
+.timer-header {
+    margin-bottom: 3rem;
+}
+
+.timer-title {
+    font-size: clamp(2rem, 6vw, 3rem);
+    font-weight: 800;
+    color: var(--work-primary);
+    margin-bottom: 1rem;
+    transition: var(--transition-slow);
+    letter-spacing: -1px;
+    text-shadow: 0 2px 10px rgba(45, 90, 39, 0.1);
+}
+
+.timer-card.break-mode .timer-title {
+    color: var(--break-primary);
+    text-shadow: 0 2px 10px rgba(139, 21, 56, 0.1);
+}
+
+.timer-subtitle {
+    font-size: 1.2rem;
+    color: var(--gray);
+    margin: 0;
+    font-weight: 500;
+    letter-spacing: 0.5px;
+}
+
+/* ===== TIMER DISPLAY ===== */
+.timer-display {
+    margin: 2rem 0;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 300px;
+    width: 100%;
+}
+
+.time-circle {
+    width: 280px;
+    height: 280px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, var(--work-primary), var(--work-secondary));
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    box-shadow: 
+        0 25px 50px rgba(45, 90, 39, 0.4),
+        inset 0 -8px 20px rgba(0, 0, 0, 0.15),
+        0 0 0 8px rgba(255, 255, 255, 0.1);
+    transition: var(--transition-slow);
+    z-index: 2;
+    border: 3px solid rgba(255, 255, 255, 0.2);
+    box-sizing: border-box;
+}
+
+.timer-card.break-mode .time-circle {
+    background: linear-gradient(135deg, var(--break-primary), var(--break-secondary));
+    box-shadow: 
+        0 25px 50px rgba(139, 21, 56, 0.4),
+        inset 0 -8px 20px rgba(0, 0, 0, 0.15),
+        0 0 0 8px rgba(255, 255, 255, 0.1);
+}
+
+.time-text {
+    text-align: center;
+    color: var(--white);
+    z-index: 3;
+}
+
+#timeDisplay {
+    font-size: clamp(1.8rem, 7vw, 4rem);
+    font-weight: 700;
+    display: block;
+    text-shadow: 
+        0 4px 8px rgba(0, 0, 0, 0.3),
+        0 0 20px rgba(255, 255, 255, 0.2);
+    letter-spacing: -2px;
+    font-family: 'Segoe UI', system-ui, sans-serif;
+    line-height: 1.1;
+}
+
+.session-type {
+    font-size: clamp(0.8rem, 3vw, 1.2rem);
+    font-weight: 600;
+    margin-top: 0.75rem;
+    opacity: 0.95;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    line-height: 1.2;
+}
+
+/* ===== PROGRESS RING ===== */
+.progress-ring-container {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    pointer-events: none;
+    z-index: 3;
+    width: 280px;
+    height: 280px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.progress-ring {
+    width: 280px;
+    height: 280px;
+    display: block;
+    transform: rotate(-90deg);
+    filter: drop-shadow(0 0 10px rgba(255, 255, 255, 0.3));
+}
+
+.progress-ring-circle-bg {
+    fill: none;
+    stroke: rgba(255, 255, 255, 0.2);
+    stroke-width: 8;
+}
+
+.progress-ring-circle {
+    fill: none;
+    stroke: #f5f5dc;
+    stroke-width: 8;
+    stroke-linecap: round;
+    stroke-dasharray: 816.81;
+    stroke-dashoffset: 816.81;
+    transition: stroke-dashoffset 1s ease-out;
+    filter: drop-shadow(0 0 5px rgba(245, 245, 220, 0.6));
+}
+
+/* ===== TIMER CONTROLS ===== */
+.timer-controls {
+    margin: 3rem 0;
+    display: flex;
+    gap: 1.5rem;
+    justify-content: center;
+    flex-wrap: wrap;
+    padding: 0 2rem;
+}
+
+.btn {
+    border-radius: 12px;
+    padding: 1rem 2.5rem;
+    font-weight: 600;
+    border: none;
+    transition: var(--transition);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.75rem;
+    font-size: 1.1rem;
+    cursor: pointer;
+    text-decoration: none;
+    min-width: 140px;
+    height: 48px;
+    letter-spacing: 0.5px;
+    position: relative;
+    overflow: hidden;
+}
+
+.btn::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+    transition: left 0.6s ease;
+}
+
+.btn:hover::before {
+    left: 100%;
+}
+
+.btn-primary {
+    background: linear-gradient(135deg, var(--work-primary), var(--work-secondary));
+    color: var(--white);
+    box-shadow: 0 6px 20px rgba(45, 90, 39, 0.4);
+    border: 2px solid transparent;
+}
+
+.timer-card.break-mode .btn-primary {
+    background: linear-gradient(135deg, var(--break-primary), var(--break-secondary));
+    box-shadow: 0 6px 20px rgba(139, 21, 56, 0.4);
+}
+
+.btn-primary:hover {
+    transform: translateY(-3px) scale(1.02);
+    box-shadow: 0 10px 30px rgba(45, 90, 39, 0.5);
+    border-color: var(--work-accent);
+}
+
+.timer-card.break-mode .btn-primary:hover {
+    box-shadow: 0 10px 30px rgba(139, 21, 56, 0.5);
+    border-color: var(--break-accent);
+}
+
+.btn-secondary {
+    background: linear-gradient(135deg, var(--gray), #95a5a6);
+    color: var(--white);
+    box-shadow: 0 6px 20px rgba(127, 140, 141, 0.4);
+    border: 2px solid transparent;
+}
+
+.btn-secondary:hover {
+    transform: translateY(-3px) scale(1.02);
+    box-shadow: 0 10px 30px rgba(127, 140, 141, 0.5);
+    background: linear-gradient(135deg, #95a5a6, var(--gray));
+}
+
+.btn-outline-secondary {
+    border: 2px solid var(--work-primary);
+    color: var(--work-primary);
+    background: rgba(255, 255, 255, 0.9);
+    backdrop-filter: blur(10px);
+    font-weight: 700;
+}
+
+.timer-card.break-mode .btn-outline-secondary {
+    border-color: var(--break-primary);
+    color: var(--break-primary);
+}
+
+.btn-outline-secondary:hover {
+    background: var(--work-primary);
+    color: var(--white);
+    transform: translateY(-3px) scale(1.02);
+    box-shadow: 0 10px 30px rgba(45, 90, 39, 0.4);
+    border-color: var(--work-accent);
+}
+
+.timer-card.break-mode .btn-outline-secondary:hover {
+    background: var(--break-primary);
+    color: var(--white);
+    box-shadow: 0 10px 30px rgba(139, 21, 56, 0.4);
+    border-color: var(--break-accent);
+}
+
+.btn:active {
+    transform: translateY(-1px) scale(0.98);
+    transition: transform 0.1s ease;
+}
+
+/* ===== SESSION SETTINGS ===== */
+.session-settings {
+    margin: 3rem 0;
+    padding: 2rem;
+    background: rgba(255, 255, 255, 0.7);
+    border-radius: 20px;
+    backdrop-filter: blur(15px);
+    border: 1px solid rgba(255, 255, 255, 0.4);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+}
+
+.setting-item {
+    text-align: center;
+    padding: 1.5rem 1rem;
+    border-radius: 16px;
+    cursor: pointer;
+    transition: var(--transition);
+    background: rgba(255, 255, 255, 0.9);
+    margin-bottom: 1rem;
+    border: 2px solid transparent;
+    position: relative;
+    overflow: hidden;
+    min-height: 100px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.setting-item::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(135deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.setting-item:hover::before {
+    opacity: 1;
+}
+
+.setting-item:hover {
+    transform: translateY(-5px) scale(1.02);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+    border-color: rgba(255, 255, 255, 0.6);
+    background: rgba(255, 255, 255, 0.95);
+}
+
+.setting-item.active {
+    background: linear-gradient(135deg, var(--work-primary), var(--work-secondary));
+    color: var(--white);
+    box-shadow: 0 10px 30px rgba(45, 90, 39, 0.5);
+    border-color: var(--work-accent);
+    transform: translateY(-3px);
+}
+
+.timer-card.break-mode .setting-item.active {
+    background: linear-gradient(135deg, var(--break-primary), var(--break-secondary));
+    box-shadow: 0 10px 30px rgba(139, 21, 56, 0.5);
+    border-color: var(--break-accent);
+}
+
+.setting-icon {
+    font-size: 1.8rem;
+    margin-bottom: 0.75rem;
+    display: block;
+}
+
+.setting-label {
+    font-weight: 700;
+    font-size: 1rem;
+    display: block;
+    letter-spacing: 0.5px;
+}
+
+.setting-time {
+    font-size: 0.85rem;
+    opacity: 0.85;
+    display: block;
+    margin-top: 0.5rem;
+    font-weight: 500;
+}
+
+/* ===== SESSION COUNTER ===== */
+.session-counter {
+    margin: 2rem 0;
+    padding: 1.5rem;
+    background: rgba(255, 255, 255, 0.8);
+    border-radius: 15px;
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+.session-counter h5 {
+    color: var(--dark);
+    margin-bottom: 1rem;
+    font-weight: 600;
+}
+
+.session-badges {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.badge {
+    padding: 0.5rem 1rem;
+    font-size: 0.9rem;
+    border-radius: 20px;
+    font-weight: 600;
+}
+
+.bg-success {
+    background-color: var(--work-secondary) !important;
+    color: var(--white);
+}
+
+.bg-info {
+    background-color: var(--work-accent) !important;
+    color: var(--white);
+}
+
+/* ===== SETTINGS BUTTON ===== */
+.settings-btn {
+    position: fixed;
+    bottom: 2rem;
+    right: 2rem;
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, var(--work-primary), var(--work-secondary));
+    color: var(--white);
+    border: none;
+    font-size: 1.2rem;
+    box-shadow: 0 5px 15px rgba(45, 90, 39, 0.3);
+    transition: var(--transition);
+    z-index: 1000;
+    cursor: pointer;
+}
+
+body.break-mode .settings-btn {
+    background: linear-gradient(135deg, var(--break-primary), var(--break-secondary));
+    box-shadow: 0 5px 15px rgba(139, 21, 56, 0.3);
+}
+
+.settings-btn:hover {
+    transform: scale(1.1) rotate(180deg);
+    box-shadow: 0 8px 25px rgba(45, 90, 39, 0.4);
+}
+
+body.break-mode .settings-btn:hover {
+    box-shadow: 0 8px 25px rgba(139, 21, 56, 0.4);
+}
+
+/* ===== ANIMATIONS ===== */
+@keyframes pulse {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.05); }
+    100% { transform: scale(1); }
+}
+
+.time-circle.active {
+    animation: pulse 2s infinite ease-in-out;
+}
+
+@keyframes shake {
+    0%, 100% { transform: translateX(0); }
+    25% { transform: translateX(-5px); }
+    75% { transform: translateX(5px); }
+}
+
+.timer-complete {
+    animation: shake 0.5s ease-in-out;
+}
+
+@keyframes slideDown {
+    from {
+        transform: translateX(-50%) translateY(-100%);
+        opacity: 0;
+    }
+    to {
+        transform: translateX(-50%) translateY(0);
+        opacity: 1;
+    }
+}
+
+@keyframes slideInRight {
+    from {
+        transform: translateX(100%);
+        opacity: 0;
+    }
+    to {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+/* ===== MODAL STYLES ===== */
+.modal-content {
+    border-radius: 15px;
+    border: none;
+    box-shadow: var(--shadow-md);
+    backdrop-filter: blur(10px);
+}
+
+.modal-header {
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+    background: linear-gradient(135deg, var(--work-light), var(--work-bg));
+    border-radius: 15px 15px 0 0;
+}
+
+.modal-body {
+    background: rgba(255, 255, 255, 0.95);
+}
+
+.modal-footer {
+    background: rgba(255, 255, 255, 0.95);
+    border-radius: 0 0 15px 15px;
+}
+
+/* ===== NOTIFICATIONS ===== */
+.flash-message {
+    position: fixed;
+    top: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: var(--work-primary);
+    color: white;
+    padding: 15px 25px;
+    border-radius: 8px;
+    box-shadow: var(--shadow-md);
+    z-index: 1050;
+    animation: slideDown 0.3s ease;
+    max-width: 400px;
+    text-align: center;
+    font-weight: 500;
+}
+
+.desktop-notification {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    width: 350px;
+    background: white;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    box-shadow: var(--shadow-md);
+    z-index: 1060;
+    animation: slideInRight 0.3s ease;
+    cursor: pointer;
+    overflow: hidden;
+}
+
+.notification-content {
+    padding: 0;
+}
+
+.notification-header {
+    background: var(--work-primary);
+    color: white;
+    padding: 12px 15px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-weight: 600;
+}
+
+.notification-icon {
+    font-size: 18px;
+    margin-right: 8px;
+}
+
+.notification-title {
+    flex-grow: 1;
+    font-size: 14px;
+}
+
+.notification-close {
+    background: none;
+    border: none;
+    color: white;
+    font-size: 20px;
+    cursor: pointer;
+    padding: 0;
+    width: 24px;
+    height: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 4px;
+    transition: var(--transition);
+}
+
+.notification-close:hover {
+    background-color: rgba(255, 255, 255, 0.2);
+}
+
+.notification-body {
+    padding: 15px;
+    color: #333;
+    font-size: 14px;
+    line-height: 1.4;
+}
+
+/* ===== RESPONSIVE DESIGN ===== */
+
+/* Large Desktop (1200px and up) */
+@media (min-width: 1200px) {
+    .pomodoro-container {
+        padding: 3rem 2rem;
+    }
+    
+    .timer-card {
+        max-width: 700px;
+        padding: 3rem 2.5rem;
+    }
+    
+    .timer-display {
+        height: 350px;
+    }
+    
+    .time-circle {
+        width: 320px;
+        height: 320px;
+    }
+    
+    .progress-ring-container {
+        width: 320px;
+        height: 320px;
+    }
+    
+    .progress-ring {
+        width: 320px;
+        height: 320px;
+    }
+    
+    .timer-controls {
+        gap: 2rem;
+    }
+    
+    .btn {
+        min-width: 160px;
+        height: 52px;
+        font-size: 1.2rem;
+        padding: 1.2rem 3rem;
+    }
+}
+
+/* Desktop (992px to 1199px) */
+@media (min-width: 992px) and (max-width: 1199px) {
+    .pomodoro-container {
+        padding: 2.5rem 1.5rem;
+    }
+    
+    .timer-card {
+        max-width: 600px;
+        padding: 2.5rem 2rem;
+    }
+}
+
+/* Tablet (768px to 991px) */
+@media (min-width: 768px) and (max-width: 991px) {
+    .pomodoro-container {
+        padding: 2rem 1rem;
+    }
+    
+    .timer-card {
+        max-width: 500px;
+        padding: 2rem 1.5rem;
+        border-radius: 25px;
+    }
+    
+    .timer-display {
+        height: 280px;
+    }
+    
+    .time-circle {
+        width: 260px;
+        height: 260px;
+    }
+    
+    .progress-ring-container {
+        width: 260px;
+        height: 260px;
+    }
+    
+    .progress-ring {
+        width: 260px;
+        height: 260px;
+    }
+    
+    .timer-controls {
+        gap: 1.2rem;
+    }
+    
+    .btn {
+        min-width: 130px;
+        height: 46px;
+        font-size: 1rem;
+        padding: 1rem 2rem;
+    }
+}
+
+/* Mobile Large (576px to 767px) */
+@media (min-width: 576px) and (max-width: 767px) {
+    .pomodoro-container {
+        padding: 1.5rem 1rem;
+        min-height: calc(100vh - 70px);
+    }
+    
+    .timer-card {
+        padding: 1.5rem 1rem;
+        margin: 0 0.5rem;
+        border-radius: 20px;
+    }
+    
+    .timer-display {
+        height: 250px;
+        margin: 1.5rem 0;
+    }
+    
+    .time-circle {
+        width: 220px;
+        height: 220px;
+    }
+    
+    .progress-ring-container {
+        width: 220px;
+        height: 220px;
+    }
+    
+    .progress-ring {
+        width: 220px;
+        height: 220px;
+    }
+    
+    .timer-controls {
+        flex-direction: column;
+        align-items: center;
+        gap: 1rem;
+        margin: 1.5rem 0;
+    }
+    
+    .btn {
+        width: 200px;
+        justify-content: center;
+        min-width: auto;
+        height: 44px;
+        font-size: 1rem;
+        padding: 0.9rem 1.5rem;
+    }
+    
+    .session-settings {
+        padding: 1.5rem;
+        margin: 1.5rem 0;
+    }
+    
+    .setting-item {
+        min-height: 80px;
+        padding: 1rem 0.5rem;
+    }
+    
+    .settings-btn {
+        bottom: 1rem;
+        right: 1rem;
+        width: 50px;
+        height: 50px;
+    }
+}
+
+/* Mobile Small (up to 575px) */
+@media (max-width: 575px) {
+    .pomodoro-container {
+        padding: 1rem 0.5rem;
+        min-height: calc(100vh - 60px);
+    }
+    
+    .timer-card {
+        padding: 1.5rem 1rem;
+        margin: 0 0.25rem;
+        border-radius: 15px;
+    }
+    
+    .timer-header {
+        margin-bottom: 1.5rem;
+    }
+    
+    .timer-display {
+        height: 220px;
+        margin: 1rem 0;
+    }
+    
+    .time-circle {
+        width: 180px;
+        height: 180px;
+    }
+    
+    .progress-ring-container {
+        width: 180px;
+        height: 180px;
+    }
+    
+    .progress-ring {
+        width: 180px;
+        height: 180px;
+    }
+    
+    .session-type {
+        font-size: 0.9rem;
+    }
+    
+    .timer-controls {
+        flex-direction: column;
+        align-items: center;
+        gap: 0.8rem;
+        margin: 1rem 0;
+    }
+    
+    .btn {
+        width: 180px;
+        font-size: 0.9rem;
+        height: 42px;
+        padding: 0.8rem 1rem;
+    }
+    
+    .session-settings {
+        padding: 1rem;
+        margin: 1rem 0;
+    }
+    
+    .session-settings .row {
+        margin: 0 -5px;
+    }
+    
+    .session-settings .col-3 {
+        padding: 0 5px;
+        margin-bottom: 0.5rem;
+        flex: 0 0 50%;
+        max-width: 50%;
+    }
+    
+    .setting-item {
+        min-height: 70px;
+        padding: 0.8rem 0.5rem;
+        border-radius: 12px;
+    }
+    
+    .setting-icon {
+        font-size: 1.4rem;
+        margin-bottom: 0.5rem;
+    }
+    
+    .setting-label {
+        font-size: 0.8rem;
+    }
+    
+    .setting-time {
+        font-size: 0.7rem;
+    }
+    
+    .desktop-notification {
+        width: 280px;
+        right: 10px;
+        top: 10px;
+    }
+    
+    .navbar-brand {
+        font-size: 1.2rem;
+    }
+    
+    .navbar-toggler {
+        padding: 0.2rem 0.4rem;
+        font-size: 0.9rem;
+    }
+    
+    .navbar-toggler-icon {
+        width: 1.2em;
+        height: 1.2em;
+    }
+    
+    .settings-btn {
+        bottom: 0.8rem;
+        right: 0.8rem;
+        width: 45px;
+        height: 45px;
+        font-size: 1rem;
+    }
+}
+
+/* Very Small Mobile (up to 375px) */
+@media (max-width: 375px) {
+    .pomodoro-container {
+        padding: 0.8rem 0.25rem;
+    }
+    
+    .timer-card {
+        padding: 1rem 0.8rem;
+    }
+    
+    .time-circle {
+        width: 160px;
+        height: 160px;
+    }
+    
+    .progress-ring-container {
+        width: 160px;
+        height: 160px;
+    }
+    
+    .progress-ring {
+        width: 160px;
+        height: 160px;
+    }
+    
+    .timer-display {
+        height: 200px;
+    }
+    
+    #timeDisplay {
+        font-size: clamp(1.4rem, 6vw, 2.5rem);
+        letter-spacing: -1px;
+    }
+    
+    .session-type {
+        font-size: clamp(0.7rem, 2.5vw, 0.9rem);
+        margin-top: 0.5rem;
+    }
+    
+    .btn {
+        width: 160px;
+        font-size: 0.85rem;
+    }
+}
+
+/* ===== SOUND SELECTION INTERFACE ===== */
+.sound-selection-container {
+    border: 1px solid #dee2e6;
+    border-radius: 0.5rem;
+    padding: 1rem;
+    background: #f8f9fa;
+}
+
+.sound-group-title {
+    color: #495057;
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+    border-bottom: 1px solid #e9ecef;
+    padding-bottom: 0.25rem;
+}
+
+.sound-option {
+    position: relative;
+    height: 100%;
+}
+
+.sound-radio {
+    position: absolute;
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+.sound-label {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 0.75rem 0.5rem;
+    border: 2px solid #dee2e6;
+    border-radius: 0.5rem;
+    background: white;
+    cursor: pointer;
+    transition: var(--transition);
+    text-align: center;
+    height: 100%;
+    min-height: 80px;
+    margin: 0;
+}
+
+.sound-label i {
+    font-size: 1.25rem;
+    margin-bottom: 0.25rem;
+    color: #6c757d;
+    transition: var(--transition);
+}
+
+.sound-label span {
+    font-weight: 500;
+    font-size: 0.85rem;
+    color: #495057;
+    margin-bottom: 0.125rem;
+}
+
+.sound-label small {
+    font-size: 0.7rem;
+    color: #6c757d;
+    opacity: 0.8;
+}
+
+.sound-radio:checked + .sound-label {
+    border-color: var(--work-primary);
+    background: var(--work-light);
+    box-shadow: 0 2px 8px rgba(45, 90, 39, 0.2);
+}
+
+.break-mode .sound-radio:checked + .sound-label {
+    border-color: var(--break-primary);
+    background: var(--break-light);
+    box-shadow: 0 2px 8px rgba(139, 21, 56, 0.2);
+}
+
+.sound-radio:checked + .sound-label i {
+    color: var(--work-primary);
+    transform: scale(1.1);
+}
+
+.break-mode .sound-radio:checked + .sound-label i {
+    color: var(--break-primary);
+}
+
+.sound-radio:checked + .sound-label span {
+    color: var(--work-primary);
+    font-weight: 600;
+}
+
+.break-mode .sound-radio:checked + .sound-label span {
+    color: var(--break-primary);
+}
+
+.sound-label:hover {
+    border-color: var(--work-secondary);
+    background: #f8f9fa;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.break-mode .sound-label:hover {
+    border-color: var(--break-secondary);
+}
+
+/* Custom Sound Cards */
+.custom-sound-card {
+    position: relative;
+    overflow: visible; /* Allow delete button to show outside */
+    margin-bottom: 2rem; /* Space for delete button */
+}
+
+.custom-sound-card .sound-label {
+    background: linear-gradient(135deg, #4CAF50, #45a049);
+    color: white;
+    border: 2px solid #4CAF50;
+    padding: 0.75rem 0.5rem;
+    min-height: 80px;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+    hyphens: auto;
+}
+
+.custom-sound-card .sound-label:hover {
+    border-color: #45a049;
+    background: linear-gradient(135deg, #45a049, #3d8b40);
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(76, 175, 80, 0.3);
+}
+
+.custom-sound-card .sound-radio:checked + .sound-label {
+    border-color: #45a049;
+    background: linear-gradient(135deg, #45a049, #3d8b40);
+    box-shadow: 0 2px 8px rgba(76, 175, 80, 0.4);
+}
+
+.custom-sound-card .sound-label i {
+    color: white !important;
+    font-size: 1.25rem;
+    margin-bottom: 0.5rem;
+}
+
+.custom-sound-card .sound-label span {
+    color: white !important;
+    font-weight: 600;
+    line-height: 1.2;
+    display: block;
+    word-break: break-word;
+    max-width: 100%;
+}
+
+.custom-sound-card .sound-label small {
+    color: rgba(255, 255, 255, 0.9) !important;
+    font-size: 0.7rem;
+}
+
+/* Custom Sound Delete Button - appears below on hover */
+.custom-sound-delete {
+    position: absolute;
+    bottom: -2.5rem;
+    left: 50%;
+    transform: translateX(-50%);
+    background: #dc3545;
+    color: white;
+    border: none;
+    border-radius: 20px;
+    padding: 0.4rem 0.8rem;
+    font-size: 0.75rem;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.3s ease;
+    cursor: pointer;
+    z-index: 10;
+    white-space: nowrap;
+    box-shadow: 0 2px 8px rgba(220, 53, 69, 0.3);
+    display: flex;
+    align-items: center;
+    gap: 0.3rem;
+}
+
+.custom-sound-card:hover .custom-sound-delete {
+    opacity: 1;
+    visibility: visible;
+    bottom: -2rem;
+}
+
+.custom-sound-delete:hover {
+    background: #c82333;
+    transform: translateX(-50%) scale(1.05);
+    box-shadow: 0 4px 12px rgba(220, 53, 69, 0.4);
+}
+
+.custom-sound-delete i {
+    font-size: 0.7rem;
+}
+
+/* Test Sound Button for custom sounds */
+.custom-sound-card .sound-test-btn {
+    position: absolute;
+    top: 0.4rem;
+    right: 0.4rem;
+    background: rgba(255, 255, 255, 0.2);
+    color: white;
+    border: none;
+    border-radius: 50%;
+    width: 24px;
+    height: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    transition: all 0.3s ease;
+    cursor: pointer;
+    font-size: 0.7rem;
+    backdrop-filter: blur(10px);
+}
+
+.custom-sound-card:hover .sound-test-btn {
+    opacity: 1;
+}
+
+.custom-sound-card .sound-test-btn:hover {
+    background: rgba(255, 255, 255, 0.3);
+    transform: scale(1.1);
+}
+
+/* Empty state for custom sounds */
+#customSoundsEmpty {
+    transition: var(--transition);
+}
+
+#customSoundsEmpty:hover {
+    background: #e9ecef !important;
+    border-color: #ced4da !important;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .sound-selection-container {
+        padding: 0.75rem;
+    }
+    
+    .sound-label {
+        padding: 0.5rem 0.25rem;
+        min-height: 70px;
+    }
+    
+    .sound-label i {
+        font-size: 1rem;
+    }
+    
+    .sound-label span {
+        font-size: 0.8rem;
+    }
+    
+    .sound-label small {
+        font-size: 0.65rem;
+    }
+    
+    /* Extra space for custom sound cards on mobile */
+    .custom-sound-card {
+        margin-bottom: 2.5rem;
+    }
+    
+    .custom-sound-delete {
+        bottom: -2.8rem;
+        font-size: 0.7rem;
+        padding: 0.3rem 0.6rem;
+    }
+    
+    .custom-sound-card:hover .custom-sound-delete {
+        bottom: -2.3rem;
+    }
+}
