@@ -83,3 +83,9 @@ coverage.xml
 
 # Audio files (if storing user uploads)
 # static/audio/uploads/
+
+# Development files
+dev-log.md
+notes.txt
+todo.md
+dev-notes/

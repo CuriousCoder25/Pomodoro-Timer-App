@@ -1,0 +1,56 @@
+{% extends "base.html" %}
+
+{% block title %}About - Pomodoro Timer{% endblock %}
+
+{% block content %}
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card">
+                <div class="card-body">
+                    <h1 class="card-title text-center mb-4">🍅 About Pomodoro Timer</h1>
+                    
+                    <h3>What is the Pomodoro Technique?</h3>
+                    <p>The Pomodoro Technique is a time management method developed by Francesco Cirillo in the late 1980s. The technique uses a timer to break down work into intervals, traditionally 25 minutes in length, separated by short breaks.</p>
+                    
+                    <h3>How it Works:</h3>
+                    <ol>
+                        <li><strong>Choose a task</strong> you want to work on</li>
+                        <li><strong>Set the timer</strong> for 25 minutes (one "Pomodoro")</li>
+                        <li><strong>Work</strong> on the task until the timer rings</li>
+                        <li><strong>Take a short break</strong> (5 minutes)</li>
+                        <li><strong>Repeat</strong> the process</li>
+                        <li>After 4 Pomodoros, take a <strong>longer break</strong> (15-30 minutes)</li>
+                    </ol>
+                    
+                    <h3>Features of This App:</h3>
+                    <ul>
+                        <li>🎯 Multiple session types (25min work, 50min deep work)</li>
+                        <li>🔊 6 built-in notification sounds + custom sound upload</li>
+                        <li>📱 Responsive design for all devices</li>
+                        <li>🖥️ Fullscreen focus mode (F11)</li>
+                        <li>📊 Session tracking and progress visualization</li>
+                        <li>⌨️ Keyboard shortcuts for easy control</li>
+                        <li>🔄 Auto-switching between work and break sessions</li>
+                        <li>💾 Local storage for all settings and custom sounds</li>
+                    </ul>
+                    
+                    <h3>Keyboard Shortcuts:</h3>
+                    <ul>
+                        <li><kbd>Space</kbd> - Start/Pause timer</li>
+                        <li><kbd>Ctrl + R</kbd> - Reset timer</li>
+                        <li><kbd>F11</kbd> - Toggle fullscreen focus mode</li>
+                        <li><kbd>Esc</kbd> - Exit fullscreen mode</li>
+                    </ul>
+                    
+                    <div class="text-center mt-4">
+                        <a href="{{ url_for('index') }}" class="btn btn-primary btn-lg">
+                            <i class="fas fa-arrow-left"></i> Back to Timer
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

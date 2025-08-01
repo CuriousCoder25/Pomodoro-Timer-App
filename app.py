@@ -25,6 +25,19 @@ def start_timer():
         'duration': duration
     })
 
+@app.route('/api/timer/resume', methods=['POST'])
+def resume_timer():
+    data = request.get_json()
+    timer_type = data.get('type', 'work')
+    duration = data.get('duration', 25)
+    
+    return jsonify({
+        'status': 'success',
+        'message': f'{timer_type.replace("_", " ").title()} timer resumed',
+        'type': timer_type,
+        'duration': duration
+    })
+
 @app.route('/api/timer/complete', methods=['POST'])
 def complete_timer():
     data = request.get_json()
