@@ -1,6 +1,6 @@
 # 🍅 Pomodoro Timer App
 
-A modern, responsive web-based Pomodoro Timer application built with Flask and JavaScript. Features multiple notification sounds, customizable timer durations, and a beautiful responsive design.
+A modern, responsive web-based Pomodoro Timer application built with Flask and JavaScript. Features multiple notification sounds, customizable timer durations, fullscreen focus mode, custom sound uploads, and a beautiful responsive design.
 
 ![Pomodoro Timer](https://img.shields.io/badge/Version-1.0.0-green.svg)
 ![Flask](https://img.shields.io/badge/Flask-3.0.0-blue.svg)
@@ -8,6 +8,21 @@ A modern, responsive web-based Pomodoro Timer application built with Flask and J
 ![License](https://img.shields.io/badge/License-MIT-yellow.svg)
 
 ## ✨ Features
+
+### ✨ New Features
+
+#### 🖥️ Fullscreen Focus Mode
+- **Automatic fullscreen activation** when timer starts
+- **Immersive experience** hiding all non-essential UI elements
+- **Manual toggle** with F11 key
+- **Exit with ESC** or by pausing/stopping timer
+- **Distraction-free environment** for maximum concentration
+
+#### 🎵 Custom Sound Support
+- **Upload your own notification sounds** (audio files up to 5MB)
+- **Local storage** - sounds stored in your browser, no server uploads
+- **Custom sound management** with preview and delete options
+- **Enhanced sound selection** with radio button interface
 
 ### 🎯 Core Functionality
 - **25-minute work sessions** with automatic break suggestions
@@ -128,6 +143,8 @@ The application is fully responsive and optimized for:
 
 - **Spacebar**: Start/Pause timer
 - **Ctrl + R**: Reset timer (when not running)
+- **F11**: Toggle fullscreen focus mode
+- **Escape**: Exit fullscreen focus mode
 
 ## ⚡ Technical Features
 
