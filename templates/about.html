@@ -3,51 +3,248 @@
 {% block title %}About - Pomodoro Timer{% endblock %}
 
 {% block content %}
-<div class="container mt-5">
-    <div class="row justify-content-center">
-        <div class="col-md-8">
-            <div class="card">
+<div class="container mt-4">
+    <!-- Hero Section -->
+    <div class="row justify-content-center mb-5">
+        <div class="col-md-10">
+            <div class="text-center">
+                <h1 class="display-4 mb-3">🍅 About Pomodoro Timer</h1>
+                <p class="lead text-muted">Master your time, boost your focus, achieve your goals</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <div class="row">
+        <!-- What is Pomodoro Technique -->
+        <div class="col-lg-6 mb-4">
+            <div class="card h-100 border-0 shadow-sm">
                 <div class="card-body">
-                    <h1 class="card-title text-center mb-4">🍅 About Pomodoro Timer</h1>
-                    
-                    <h3>What is the Pomodoro Technique?</h3>
-                    <p>The Pomodoro Technique is a time management method developed by Francesco Cirillo in the late 1980s. The technique uses a timer to break down work into intervals, traditionally 25 minutes in length, separated by short breaks.</p>
-                    
-                    <h3>How it Works:</h3>
-                    <ol>
-                        <li><strong>Choose a task</strong> you want to work on</li>
-                        <li><strong>Set the timer</strong> for 25 minutes (one "Pomodoro")</li>
-                        <li><strong>Work</strong> on the task until the timer rings</li>
-                        <li><strong>Take a short break</strong> (5 minutes)</li>
-                        <li><strong>Repeat</strong> the process</li>
-                        <li>After 4 Pomodoros, take a <strong>longer break</strong> (15-30 minutes)</li>
+                    <h3 class="card-title text-primary mb-3">
+                        <i class="fas fa-question-circle"></i> What is the Pomodoro Technique?
+                    </h3>
+                    <p class="card-text">The Pomodoro Technique is a time management method developed by <strong>Francesco Cirillo</strong> in the late 1980s. The technique uses a timer to break down work into intervals, traditionally 25 minutes in length, separated by short breaks.</p>
+                    <p class="card-text">Named after the tomato-shaped kitchen timer that Cirillo used as a university student, this method has helped millions of people worldwide improve their productivity and reduce mental fatigue.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- How it Works -->
+        <div class="col-lg-6 mb-4">
+            <div class="card h-100 border-0 shadow-sm">
+                <div class="card-body">
+                    <h3 class="card-title text-success mb-3">
+                        <i class="fas fa-cogs"></i> How it Works
+                    </h3>
+                    <ol class="list-group list-group-numbered">
+                        <li class="list-group-item border-0 px-0"><strong>Choose a task</strong> you want to work on</li>
+                        <li class="list-group-item border-0 px-0"><strong>Set the timer</strong> for 25 minutes (one "Pomodoro")</li>
+                        <li class="list-group-item border-0 px-0"><strong>Work</strong> on the task until the timer rings</li>
+                        <li class="list-group-item border-0 px-0"><strong>Take a short break</strong> (5 minutes)</li>
+                        <li class="list-group-item border-0 px-0"><strong>Repeat</strong> the process</li>
+                        <li class="list-group-item border-0 px-0">After 4 Pomodoros, take a <strong>longer break</strong> (15-30 minutes)</li>
                     </ol>
-                    
-                    <h3>Features of This App:</h3>
-                    <ul>
-                        <li>🎯 Multiple session types (25min work, 50min deep work)</li>
-                        <li>🔊 6 built-in notification sounds + custom sound upload</li>
-                        <li>📱 Responsive design for all devices</li>
-                        <li>🖥️ Fullscreen focus mode (F11)</li>
-                        <li>📊 Session tracking and progress visualization</li>
-                        <li>⌨️ Keyboard shortcuts for easy control</li>
-                        <li>🔄 Auto-switching between work and break sessions</li>
-                        <li>💾 Local storage for all settings and custom sounds</li>
-                    </ul>
-                    
-                    <h3>Keyboard Shortcuts:</h3>
-                    <ul>
-                        <li><kbd>Space</kbd> - Start/Pause timer</li>
-                        <li><kbd>Ctrl + R</kbd> - Reset timer</li>
-                        <li><kbd>F11</kbd> - Toggle fullscreen focus mode</li>
-                        <li><kbd>Esc</kbd> - Exit fullscreen mode</li>
-                    </ul>
-                    
-                    <div class="text-center mt-4">
-                        <a href="{{ url_for('index') }}" class="btn btn-primary btn-lg">
-                            <i class="fas fa-arrow-left"></i> Back to Timer
-                        </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Benefits Section -->
+    <div class="row mb-4">
+        <div class="col-12">
+            <div class="card border-0 shadow-sm">
+                <div class="card-body">
+                    <h3 class="card-title text-info mb-3">
+                        <i class="fas fa-star"></i> Benefits of the Pomodoro Technique
+                    </h3>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <ul class="list-unstyled">
+                                <li class="mb-2"><i class="fas fa-check text-success me-2"></i><strong>Improved Focus:</strong> Short bursts prevent mental fatigue</li>
+                                <li class="mb-2"><i class="fas fa-check text-success me-2"></i><strong>Better Time Management:</strong> Clear structure for your day</li>
+                                <li class="mb-2"><i class="fas fa-check text-success me-2"></i><strong>Reduced Procrastination:</strong> Tasks feel more manageable</li>
+                                <li class="mb-2"><i class="fas fa-check text-success me-2"></i><strong>Enhanced Motivation:</strong> Regular breaks maintain energy</li>
+                            </ul>
+                        </div>
+                        <div class="col-md-6">
+                            <ul class="list-unstyled">
+                                <li class="mb-2"><i class="fas fa-check text-success me-2"></i><strong>Stress Reduction:</strong> Prevents overwhelming workloads</li>
+                                <li class="mb-2"><i class="fas fa-check text-success me-2"></i><strong>Better Work-Life Balance:</strong> Enforced breaks</li>
+                                <li class="mb-2"><i class="fas fa-check text-success me-2"></i><strong>Increased Awareness:</strong> Track your productivity patterns</li>
+                                <li class="mb-2"><i class="fas fa-check text-success me-2"></i><strong>Goal Achievement:</strong> Break large tasks into manageable chunks</li>
+                            </ul>
+                        </div>
                     </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- App Features -->
+    <div class="row mb-4">
+        <div class="col-12">
+            <div class="card border-0 shadow-sm">
+                <div class="card-body">
+                    <h3 class="card-title text-warning mb-3">
+                        <i class="fas fa-rocket"></i> Features of This App
+                    </h3>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <ul class="list-unstyled">
+                                <li class="mb-2">🎯 <strong>Multiple Session Types:</strong> 25min work, 50min deep work</li>
+                                <li class="mb-2">🔊 <strong>Audio Notifications:</strong> 6 built-in sounds + custom uploads</li>
+                                <li class="mb-2">📱 <strong>Responsive Design:</strong> Works on all devices</li>
+                                <li class="mb-2">🖥️ <strong>Fullscreen Focus Mode:</strong> Immersive experience</li>
+                                <li class="mb-2">📊 <strong>Session Tracking:</strong> Monitor your progress</li>
+                            </ul>
+                        </div>
+                        <div class="col-md-6">
+                            <ul class="list-unstyled">
+                                <li class="mb-2">⌨️ <strong>Keyboard Shortcuts:</strong> Quick controls</li>
+                                <li class="mb-2">🔄 <strong>Auto-Switching:</strong> Seamless session transitions</li>
+                                <li class="mb-2">💾 <strong>Local Storage:</strong> Your data stays private</li>
+                                <li class="mb-2">🎨 <strong>Modern UI:</strong> Clean, distraction-free design</li>
+                                <li class="mb-2">🔔 <strong>Browser Notifications:</strong> Never miss a break</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Keyboard Shortcuts -->
+    <div class="row mb-4">
+        <div class="col-lg-6 mb-4">
+            <div class="card h-100 border-0 shadow-sm">
+                <div class="card-body">
+                    <h3 class="card-title text-danger mb-3">
+                        <i class="fas fa-keyboard"></i> Keyboard Shortcuts
+                    </h3>
+                    <div class="table-responsive">
+                        <table class="table table-borderless">
+                            <tbody>
+                                <tr>
+                                    <td><kbd class="bg-primary">Space</kbd></td>
+                                    <td>Start/Pause timer</td>
+                                </tr>
+                                <tr>
+                                    <td><kbd class="bg-secondary">Ctrl + R</kbd></td>
+                                    <td>Reset timer</td>
+                                </tr>
+                                <tr>
+                                    <td><kbd class="bg-success">F11</kbd></td>
+                                    <td>Toggle fullscreen focus mode</td>
+                                </tr>
+                                <tr>
+                                    <td><kbd class="bg-warning">Esc</kbd></td>
+                                    <td>Exit fullscreen mode</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Tips for Success -->
+        <div class="col-lg-6 mb-4">
+            <div class="card h-100 border-0 shadow-sm">
+                <div class="card-body">
+                    <h3 class="card-title text-purple mb-3">
+                        <i class="fas fa-lightbulb"></i> Tips for Success
+                    </h3>
+                    <ul class="list-unstyled">
+                        <li class="mb-2"><i class="fas fa-thumbs-up text-primary me-2"></i>Start with easier tasks to build momentum</li>
+                        <li class="mb-2"><i class="fas fa-thumbs-up text-primary me-2"></i>Use breaks to stretch, hydrate, or breathe</li>
+                        <li class="mb-2"><i class="fas fa-thumbs-up text-primary me-2"></i>Eliminate distractions during focus time</li>
+                        <li class="mb-2"><i class="fas fa-thumbs-up text-primary me-2"></i>Track your progress to stay motivated</li>
+                        <li class="mb-2"><i class="fas fa-thumbs-up text-primary me-2"></i>Adjust durations to fit your workflow</li>
+                        <li class="mb-2"><i class="fas fa-thumbs-up text-primary me-2"></i>Use fullscreen mode for deep focus</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Technology Stack -->
+    <div class="row mb-4">
+        <div class="col-12">
+            <div class="card border-0 shadow-sm">
+                <div class="card-body">
+                    <h3 class="card-title text-dark mb-3">
+                        <i class="fas fa-code"></i> Technology Stack
+                    </h3>
+                    <div class="row text-center">
+                        <div class="col-md-3 mb-3">
+                            <div class="tech-badge p-3 rounded">
+                                <i class="fab fa-python fa-2x text-primary mb-2"></i>
+                                <h6>Flask 3.0.0</h6>
+                                <small class="text-muted">Backend Framework</small>
+                            </div>
+                        </div>
+                        <div class="col-md-3 mb-3">
+                            <div class="tech-badge p-3 rounded">
+                                <i class="fab fa-bootstrap fa-2x text-purple mb-2"></i>
+                                <h6>Bootstrap 5</h6>
+                                <small class="text-muted">UI Framework</small>
+                            </div>
+                        </div>
+                        <div class="col-md-3 mb-3">
+                            <div class="tech-badge p-3 rounded">
+                                <i class="fab fa-js-square fa-2x text-warning mb-2"></i>
+                                <h6>Vanilla JS</h6>
+                                <small class="text-muted">Frontend Logic</small>
+                            </div>
+                        </div>
+                        <div class="col-md-3 mb-3">
+                            <div class="tech-badge p-3 rounded">
+                                <i class="fas fa-volume-up fa-2x text-success mb-2"></i>
+                                <h6>Web Audio API</h6>
+                                <small class="text-muted">Sound Generation</small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Call to Action -->
+    <div class="row">
+        <div class="col-12">
+            <div class="card border-0 shadow-sm bg-gradient-primary text-white">
+                <div class="card-body text-center py-4">
+                    <h3 class="card-title mb-3">Ready to Boost Your Productivity?</h3>
+                    <p class="card-text mb-4">Join millions of people who use the Pomodoro Technique to accomplish more with less stress.</p>
+                    <a href="{{ url_for('index') }}" class="btn btn-light btn-lg">
+                        <i class="fas fa-play"></i> Start Your First Pomodoro
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+.text-purple { color: #6f42c1; }
+.bg-gradient-primary {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+}
+.tech-badge {
+    background: #f8f9fa;
+    border: 1px solid #e9ecef;
+    transition: transform 0.2s ease;
+}
+.tech-badge:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+kbd {
+    font-size: 0.875rem;
+    padding: 0.375rem 0.5rem;
+}
+</style>
                 </div>
             </div>
         </div>
