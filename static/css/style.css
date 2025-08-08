@@ -1449,3 +1449,283 @@ body.break-mode .settings-btn:hover {
     0%, 100% { opacity: 0; }
     10%, 90% { opacity: 0.7; }
 }
+
+/* ===== THEME SELECTION STYLES ===== */
+.theme-selection-container {
+    border: 1px solid #dee2e6;
+    border-radius: 0.5rem;
+    padding: 1rem;
+    background: #f8f9fa;
+}
+
+.theme-option {
+    position: relative;
+    height: 100%;
+}
+
+.theme-radio {
+    position: absolute;
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+.theme-label {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 1rem 0.75rem;
+    border: 2px solid #dee2e6;
+    border-radius: 0.5rem;
+    background: white;
+    cursor: pointer;
+    transition: var(--transition);
+    text-align: center;
+    height: 100%;
+    min-height: 100px;
+    margin: 0;
+}
+
+.theme-label i {
+    font-size: 1.5rem;
+    margin-bottom: 0.5rem;
+    color: #6c757d;
+    transition: var(--transition);
+}
+
+.theme-label span {
+    font-weight: 600;
+    font-size: 0.9rem;
+    color: #495057;
+    margin-bottom: 0.25rem;
+}
+
+.theme-label small {
+    font-size: 0.75rem;
+    color: #6c757d;
+    opacity: 0.8;
+}
+
+.theme-radio:checked + .theme-label {
+    border-color: var(--work-primary);
+    background: var(--work-light);
+    box-shadow: 0 4px 12px rgba(45, 90, 39, 0.2);
+}
+
+.break-mode .theme-radio:checked + .theme-label {
+    border-color: var(--break-primary);
+    background: var(--break-light);
+    box-shadow: 0 4px 12px rgba(139, 21, 56, 0.2);
+}
+
+.theme-radio:checked + .theme-label i {
+    color: var(--work-primary);
+    transform: scale(1.2);
+}
+
+.break-mode .theme-radio:checked + .theme-label i {
+    color: var(--break-primary);
+    transform: scale(1.2);
+}
+
+.theme-label:hover {
+    border-color: #adb5bd;
+    background: #f1f3f4;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.theme-radio:checked + .theme-label:hover {
+    transform: translateY(-2px) scale(1.02);
+}
+
+/* ===== CAT THEME STYLES ===== */
+body.cat-theme {
+    background: linear-gradient(135deg, #ffeaa7 0%, #fab1a0 50%, #fd79a8 100%);
+    position: relative;
+}
+
+body.cat-theme::before {
+    content: '🐾';
+    position: fixed;
+    top: 10%;
+    left: 5%;
+    font-size: 2rem;
+    opacity: 0.1;
+    animation: float 6s ease-in-out infinite;
+    z-index: 0;
+}
+
+body.cat-theme::after {
+    content: '🐾';
+    position: fixed;
+    top: 80%;
+    right: 10%;
+    font-size: 1.5rem;
+    opacity: 0.1;
+    animation: float 8s ease-in-out infinite reverse;
+    z-index: 0;
+}
+
+body.cat-theme.break-mode {
+    background: linear-gradient(135deg, #ff9ff3 0%, #f368e0 50%, #bf77f6 100%);
+}
+
+/* Cat Theme Navbar */
+.cat-theme .navbar {
+    background: linear-gradient(90deg, #6c5ce7 0%, #a29bfe 100%) !important;
+    position: relative;
+}
+
+.cat-theme .navbar::before {
+    content: '😸';
+    position: absolute;
+    right: 1rem;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 1.5rem;
+    opacity: 0.3;
+}
+
+.cat-theme.break-mode .navbar {
+    background: linear-gradient(90deg, #fd79a8 0%, #fdcb6e 100%) !important;
+}
+
+.cat-theme.break-mode .navbar::before {
+    content: '😺';
+}
+
+/* Cat Theme Timer */
+.cat-theme .timer-card {
+    background: rgba(255, 255, 255, 0.95);
+    border: 3px solid #ffeaa7;
+    position: relative;
+    overflow: visible;
+}
+
+.cat-theme .timer-card::before {
+    content: '🐱';
+    position: absolute;
+    top: -20px;
+    right: -15px;
+    font-size: 2.5rem;
+    animation: wiggle 3s ease-in-out infinite;
+    z-index: 10;
+}
+
+.cat-theme.break-mode .timer-card {
+    border-color: #ff9ff3;
+}
+
+.cat-theme.break-mode .timer-card::before {
+    content: '😴';
+    animation: breathe 3s ease-in-out infinite;
+}
+
+/* Cat Theme Progress Ring */
+.cat-theme #progressCircle {
+    stroke: #6c5ce7;
+    filter: drop-shadow(0 0 8px rgba(108, 92, 231, 0.3));
+}
+
+.cat-theme.break-mode #progressCircle {
+    stroke: #fd79a8;
+    filter: drop-shadow(0 0 8px rgba(253, 121, 168, 0.3));
+}
+
+/* Cat Theme Session Items */
+.cat-theme .setting-item.active {
+    background: linear-gradient(135deg, #6c5ce7, #a29bfe);
+    border-color: #6c5ce7;
+    box-shadow: 0 4px 15px rgba(108, 92, 231, 0.3);
+}
+
+.cat-theme.break-mode .setting-item.active {
+    background: linear-gradient(135deg, #fd79a8, #fdcb6e);
+    border-color: #fd79a8;
+    box-shadow: 0 4px 15px rgba(253, 121, 168, 0.3);
+}
+
+/* Cat Theme Buttons */
+.cat-theme .btn-primary {
+    background: linear-gradient(135deg, #6c5ce7, #a29bfe);
+    border-color: #6c5ce7;
+    position: relative;
+}
+
+.cat-theme .btn-primary:hover {
+    background: linear-gradient(135deg, #5f3dc4, #8c7ae6);
+    border-color: #5f3dc4;
+    transform: translateY(-2px);
+}
+
+.cat-theme.break-mode .btn-primary {
+    background: linear-gradient(135deg, #fd79a8, #fdcb6e);
+    border-color: #fd79a8;
+}
+
+.cat-theme.break-mode .btn-primary:hover {
+    background: linear-gradient(135deg, #e84393, #e17055);
+    border-color: #e84393;
+}
+
+/* Cat Theme Animations */
+@keyframes wiggle {
+    0%, 50%, 100% { transform: rotate(0deg); }
+    25% { transform: rotate(-5deg); }
+    75% { transform: rotate(5deg); }
+}
+
+@keyframes breathe {
+    0%, 100% { transform: scale(1); opacity: 1; }
+    50% { transform: scale(1.1); opacity: 0.8; }
+}
+
+@keyframes float {
+    0%, 100% { transform: translateY(0px); }
+    50% { transform: translateY(-20px); }
+}
+
+/* Cat Theme Session Counter */
+.cat-theme .session-counter {
+    background: rgba(255, 255, 255, 0.9);
+    border: 2px solid #ffeaa7;
+    border-radius: 1rem;
+    position: relative;
+}
+
+.cat-theme .session-counter::before {
+    content: '🐾';
+    position: absolute;
+    top: -10px;
+    left: 10px;
+    font-size: 1.2rem;
+    opacity: 0.6;
+}
+
+.cat-theme.break-mode .session-counter {
+    border-color: #ff9ff3;
+}
+
+/* Cat Theme Settings Modal */
+.cat-theme .modal-content {
+    border: 3px solid #ffeaa7;
+    position: relative;
+}
+
+.cat-theme .modal-header {
+    background: linear-gradient(90deg, #6c5ce7, #a29bfe);
+    color: white;
+    position: relative;
+}
+
+.cat-theme .modal-header::after {
+    content: '⚙️😸';
+    position: absolute;
+    right: 3rem;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 1.2rem;
+    opacity: 0.8;
+}

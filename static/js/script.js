@@ -18,7 +18,8 @@
             soundNotifications: true,
             notificationVolume: 50,
             notificationSound: 'chord',
-            customSoundName: null
+            customSoundName: null,
+            appTheme: 'normal'
         };
         
         this.customSounds = new Map(); // Store custom audio files
@@ -280,7 +281,9 @@
         this.timeDisplay.textContent = 
             `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
         
-        document.title = `${this.timeDisplay.textContent} - Pomodoro Timer`;
+        // Update title with theme-appropriate emoji
+        const emoji = this.settings.appTheme === 'cat' ? '🐱' : '🍅';
+        document.title = `${this.timeDisplay.textContent} - ${emoji} Pomodoro Timer`;
     }
     
     updateProgressRing() {
@@ -634,6 +637,13 @@
             }
         }
         
+        // Handle theme selection from radio buttons
+        const selectedThemeRadio = document.querySelector('input[name="appTheme"]:checked');
+        if (selectedThemeRadio) {
+            this.settings.appTheme = selectedThemeRadio.value;
+            this.applyTheme(selectedThemeRadio.value);
+        }
+        
         document.querySelector('[data-type="work_25"]').dataset.duration = this.settings.workDuration;
         document.querySelector('[data-type="work_50"]').dataset.duration = this.settings.deepWorkDuration;
         document.querySelector('[data-type="short_break"]').dataset.duration = this.settings.shortBreakDuration;
@@ -703,11 +713,58 @@
                 }
             }, 100); // Small delay to ensure custom sounds are loaded
             
+            // Handle theme selection with radio buttons
+            const themeRadio = document.getElementById(`theme-${this.settings.appTheme}`);
+            if (themeRadio) {
+                themeRadio.checked = true;
+            } else {
+                // Fallback to normal theme
+                document.getElementById('theme-normal').checked = true;
+                this.settings.appTheme = 'normal';
+            }
+            
+            // Apply the saved theme
+            this.applyTheme(this.settings.appTheme);
+            
             // Add volume slider event listener
             document.getElementById('notificationVolume').addEventListener('input', (e) => {
                 document.getElementById('volumeDisplay').textContent = e.target.value;
             });
         });
+    }
+    
+    // Theme Management Methods
+    applyTheme(theme) {
+        // Remove all theme classes
+        document.body.classList.remove('cat-theme');
+        
+        // Apply selected theme
+        if (theme === 'cat') {
+            document.body.classList.add('cat-theme');
+            // Update favicon for cat theme
+            this.updateFavicon('🐱');
+            // Show cat-specific notifications
+            if (this.settings.appTheme !== theme) { // Only show on theme change
+                this.showFlashMessage('Meow! Cat theme activated! 🐱✨');
+            }
+        } else {
+            // Normal theme (default)
+            this.updateFavicon('🍅');
+            if (this.settings.appTheme !== theme && theme === 'normal') { // Only show on theme change
+                this.showFlashMessage('Classic theme restored! 🍅');
+            }
+        }
+    }
+    
+    updateFavicon(emoji) {
+        // This method updates the page title with the theme emoji
+        // Since we can't easily change favicon, we'll update the title
+        const baseTitle = 'Pomodoro Timer';
+        if (this.timeDisplay && this.timeDisplay.textContent !== '25:00') {
+            document.title = `${this.timeDisplay.textContent} - ${emoji} ${baseTitle}`;
+        } else {
+            document.title = `${emoji} ${baseTitle}`;
+        }
     }
     
     // Custom Sound Handling Methods

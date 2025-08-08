@@ -218,6 +218,35 @@
                         <i class="fas fa-volume-up"></i> Test Notification Sound
                     </button>
                 </div>
+                
+                <!-- Theme Selection -->
+                <div class="mb-3">
+                    <label class="form-label">App Theme</label>
+                    <div class="theme-selection-container">
+                        <div class="row g-2">
+                            <div class="col-6">
+                                <div class="theme-option" data-theme="normal">
+                                    <input type="radio" name="appTheme" id="theme-normal" value="normal" class="theme-radio" checked>
+                                    <label for="theme-normal" class="theme-label">
+                                        <i class="fas fa-clock"></i>
+                                        <span>Normal</span>
+                                        <small>Classic Design</small>
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="col-6">
+                                <div class="theme-option" data-theme="cat">
+                                    <input type="radio" name="appTheme" id="theme-cat" value="cat" class="theme-radio">
+                                    <label for="theme-cat" class="theme-label">
+                                        <i class="fas fa-cat"></i>
+                                        <span>Cat</span>
+                                        <small>Feline Focus</small>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
