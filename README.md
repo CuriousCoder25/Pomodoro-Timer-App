@@ -52,7 +52,6 @@ A modern, responsive web-based Pomodoro Timer application built with Flask and J
 - **Creamy progress ring** with customizable radius
 - **Bootstrap 5** styling with custom CSS
 - **Comprehensive About page** with technique guide, benefits, and tips
-- **Theme selection** - Choose between Normal and Cat themes
 
 ### ⚙️ Customization
 - **Adjustable timer durations** for all session types
@@ -61,7 +60,6 @@ A modern, responsive web-based Pomodoro Timer application built with Flask and J
 - **Keyboard shortcuts** (Space to start/pause, Ctrl+R to reset)
 - **Background timer** continues when tab is not active
 - **Educational content** in About page with Pomodoro technique explanation
-- **Theme customization** - Normal theme (classic) or Cat theme (fun & colorful)
 
 ## 🚀 Quick Start
 
