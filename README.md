@@ -10,23 +10,23 @@ A modern, responsive web-based Pomodoro Timer application built with Flask and J
 ## 📸 Screenshots
 
 ### Main Timer Interface
-![Main Timer](https://via.placeholder.com/800x600/2D5A27/FFFFFF?text=Main+Timer+Interface)
+![Main Timer](hscreenshots_for_readme/home.png)
 *Clean, modern timer interface with progress ring and session controls*
 
 ### Fullscreen Focus Mode
-![Fullscreen Mode](https://via.placeholder.com/800x600/1a1a2e/FFFFFF?text=Fullscreen+Focus+Mode)
+![Fullscreen Mode](screenshots_for_readme/image copy 2.png)
 *Immersive fullscreen experience for distraction-free productivity*
 
 ### Settings & Customization
-![Settings Modal](https://via.placeholder.com/800x600/f8f9fa/333333?text=Settings+%26+Customization)
+![Settings Modal](screenshots_for_readme/image copy.png)
 *Comprehensive settings for timer durations, sounds, and preferences*
 
 ### Custom Sound Management
-![Custom Sounds](https://via.placeholder.com/800x600/4CAF50/FFFFFF?text=Custom+Sound+Management)
+![Custom Sounds](screenshots_for_readme/image copy 3.png)
 *Upload and manage your own notification sounds*
 
-### Mobile Responsive Design
-![Mobile View](https://via.placeholder.com/400x800/2D5A27/FFFFFF?text=Mobile+Responsive)
+<!-- ### Mobile Responsive Design
+![Mobile View](https://via.placeholder.com/400x800/2D5A27/FFFFFF?text=Mobile+Responsive) -->
 *Fully responsive design works perfectly on all devices*
 
 ## ✨ Features
