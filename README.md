@@ -114,6 +114,8 @@ Pomodoro Timer App/
 ├── app.py                 # Main Flask application
 ├── config.py             # Configuration settings
 ├── requirements.txt      # Python dependencies
+├── requirements-dev.txt  # Development dependencies  
+├── requirements-prod.txt # Production dependencies
 ├── README.md            # Project documentation
 ├── .gitignore           # Git ignore rules
 ├── static/
@@ -127,7 +129,6 @@ Pomodoro Timer App/
 │   ├── base.html        # Base template with responsive navbar
 │   ├── pomodoro.html    # Main timer page with fullscreen focus mode
 │   └── about.html       # Comprehensive About page with technique guide
-└── venv/                # Virtual environment
 ```
 
 ## 📱 Responsive Design
