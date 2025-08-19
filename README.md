@@ -7,6 +7,28 @@ A modern, responsive web-based Pomodoro Timer application built with Flask and J
 ![Bootstrap](https://img.shields.io/badge/Bootstrap-5.1.3-purple.svg)
 ![License](https://img.shields.io/badge/License-MIT-yellow.svg)
 
+## 📸 Screenshots
+
+### Main Timer Interface
+![Main Timer](https://via.placeholder.com/800x600/2D5A27/FFFFFF?text=Main+Timer+Interface)
+*Clean, modern timer interface with progress ring and session controls*
+
+### Fullscreen Focus Mode
+![Fullscreen Mode](https://via.placeholder.com/800x600/1a1a2e/FFFFFF?text=Fullscreen+Focus+Mode)
+*Immersive fullscreen experience for distraction-free productivity*
+
+### Settings & Customization
+![Settings Modal](https://via.placeholder.com/800x600/f8f9fa/333333?text=Settings+%26+Customization)
+*Comprehensive settings for timer durations, sounds, and preferences*
+
+### Custom Sound Management
+![Custom Sounds](https://via.placeholder.com/800x600/4CAF50/FFFFFF?text=Custom+Sound+Management)
+*Upload and manage your own notification sounds*
+
+### Mobile Responsive Design
+![Mobile View](https://via.placeholder.com/400x800/2D5A27/FFFFFF?text=Mobile+Responsive)
+*Fully responsive design works perfectly on all devices*
+
 ## ✨ Features
 
 ### ✨ New Features
@@ -60,6 +82,14 @@ A modern, responsive web-based Pomodoro Timer application built with Flask and J
 - **Keyboard shortcuts** (Space to start/pause, Ctrl+R to reset)
 - **Background timer** continues when tab is not active
 - **Educational content** in About page with Pomodoro technique explanation
+
+## 🎬 Live Demo
+
+> **Note**: Replace this with your actual demo URL after deployment
+
+🔗 **[Try the Live Demo](https://your-app-name.herokuapp.com)** *(Coming Soon)*
+
+*Experience the full Pomodoro Timer with all features in your browser!*
 
 ## 🚀 Quick Start
 
@@ -117,6 +147,9 @@ Pomodoro Timer App/
 ├── requirements-dev.txt  # Development dependencies  
 ├── requirements-prod.txt # Production dependencies
 ├── README.md            # Project documentation
+├── LICENSE              # MIT License file
+├── CHANGELOG.md         # Version history and changes
+├── CONTRIBUTING.md      # Contribution guidelines
 ├── .gitignore           # Git ignore rules
 ├── static/
 │   ├── css/
@@ -125,10 +158,10 @@ Pomodoro Timer App/
 │   │   └── script.js    # Timer functionality
 │   └── audio/
 │       └── README.txt   # Audio assets info
-├── templates/
-│   ├── base.html        # Base template with responsive navbar
-│   ├── pomodoro.html    # Main timer page with fullscreen focus mode
-│   └── about.html       # Comprehensive About page with technique guide
+└── templates/
+    ├── base.html        # Base template with responsive navbar
+    ├── pomodoro.html    # Main timer page with fullscreen focus mode
+    └── about.html       # Comprehensive About page with technique guide
 ```
 
 ## 📱 Responsive Design
@@ -225,11 +258,17 @@ For production deployment, consider using:
 
 ## 🤝 Contributing
 
+We welcome contributions! Please see our [Contributing Guidelines](CONTRIBUTING.md) for details.
+
+**Quick Start:**
+
 1. Fork the repository
 2. Create a feature branch (`git checkout -b feature/amazing-feature`)
 3. Commit your changes (`git commit -m 'Add amazing feature'`)
 4. Push to the branch (`git push origin feature/amazing-feature`)
 5. Open a Pull Request
+
+For detailed information about development setup, code style, and contribution process, please read [CONTRIBUTING.md](CONTRIBUTING.md).
 
 ## 📄 License
 
@@ -253,13 +292,17 @@ If you encounter any issues or have questions:
 
 ## 🔄 Version History
 
-- **v1.0.0** (Current)
+- **v1.0.0** (Current) - [View Release Notes](CHANGELOG.md)
   - Initial release
   - Core Pomodoro functionality
+  - Fullscreen focus mode
+  - Custom sound support
   - Multiple notification sounds
   - Responsive design
   - Settings persistence
   - Browser notifications
+
+For detailed changelog, see [CHANGELOG.md](CHANGELOG.md)
 
 ---
 

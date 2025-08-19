@@ -89,3 +89,9 @@ dev-log.md
 notes.txt
 todo.md
 dev-notes/
+
+# Screenshots and demos (keep final ones)
+screenshots/temp/
+*.screenshot.png
+demo-recordings/
+temp-images/
