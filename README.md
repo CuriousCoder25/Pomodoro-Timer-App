@@ -10,19 +10,21 @@ A modern, responsive web-based Pomodoro Timer application built with Flask and J
 ## 📸 Screenshots
 
 ### Main Timer Interface
-![Main Timer](hscreenshots_for_readme/home.png)
+![Main Timer](https://raw.githubusercontent.com/CuriousCoder25/Pomodoro-Timer-App/refs/heads/fullscreen-focus-mode/screenshots_for_readme/home.png)
+![](https://raw.githubusercontent.com/CuriousCoder25/Pomodoro-Timer-App/refs/heads/fullscreen-focus-mode/screenshots_for_readme/image.png)
+![](https://raw.githubusercontent.com/CuriousCoder25/Pomodoro-Timer-App/refs/heads/fullscreen-focus-mode/screenshots_for_readme/break.png)
 *Clean, modern timer interface with progress ring and session controls*
 
 ### Fullscreen Focus Mode
-![Fullscreen Mode](screenshots_for_readme/image copy 2.png)
+![Fullscreen Mode](https://raw.githubusercontent.com/CuriousCoder25/Pomodoro-Timer-App/refs/heads/fullscreen-focus-mode/screenshots_for_readme/image%20copy%202.png)
 *Immersive fullscreen experience for distraction-free productivity*
 
 ### Settings & Customization
-![Settings Modal](screenshots_for_readme/image copy.png)
+![Settings Modal](https://raw.githubusercontent.com/CuriousCoder25/Pomodoro-Timer-App/refs/heads/fullscreen-focus-mode/screenshots_for_readme/image%20copy.png)
 *Comprehensive settings for timer durations, sounds, and preferences*
 
 ### Custom Sound Management
-![Custom Sounds](screenshots_for_readme/image copy 3.png)
+![Custom Sounds](https://raw.githubusercontent.com/CuriousCoder25/Pomodoro-Timer-App/refs/heads/fullscreen-focus-mode/screenshots_for_readme/image%20copy%203.png)
 *Upload and manage your own notification sounds*
 
 <!-- ### Mobile Responsive Design
