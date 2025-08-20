@@ -85,7 +85,6 @@ A modern, responsive web-based Pomodoro Timer application built with Flask and J
 
 ## 🎬 Live Demo
 
-> **Note**: Replace this with your actual demo URL after deployment
 
 🔗 **[Try the Live Demo](https://your-app-name.herokuapp.com)** *(Coming Soon)*
 
